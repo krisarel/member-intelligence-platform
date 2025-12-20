@@ -1,13 +1,18 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
-import { Users, MessageSquare, Briefcase, CheckCircle2, RefreshCw, Link as LinkIcon } from 'lucide-react';
+import { Users, MessageSquare, Briefcase, CheckCircle2, RefreshCw, Link as LinkIcon, ShieldAlert, Search } from 'lucide-react';
 import { useStore } from '@/lib/store';
+import { Input } from '@/components/ui/input';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { UserTier } from '@/types';
+import { toast } from 'sonner';
 
 // Mock Data for Charts
 const growthData = [
@@ -29,7 +34,20 @@ const introData = [
 ];
 
 export default function AdminPage() {
-  const { users, jobs, introductions } = useStore();
+  const { users, jobs, introductions, currentUser, updateUserTier } = useStore();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  if (!currentUser || (currentUser.tier !== 'Admin' && currentUser.tier !== 'SuperAdmin')) {
+    return (
+      <div className="flex items-center justify-center h-[50vh]">
+        <div className="text-center">
+          <ShieldAlert className="w-12 h-12 text-red-500 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold">Access Denied</h1>
+          <p className="text-slate-500">You do not have permission to view this page.</p>
+        </div>
+      </div>
+    );
+  }
 
   const stats = [
     { title: "Total Members", value: users.length, icon: Users, change: "+12% this month" },
@@ -38,10 +56,22 @@ export default function AdminPage() {
     { title: "Success Rate", value: "78%", icon: CheckCircle2, change: "+2% this month" },
   ];
 
+  const filteredUsers = users.filter(user => 
+    user.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleTierChange = (userId: string, newTier: UserTier) => {
+    updateUserTier(userId, newTier);
+    toast.success("User tier updated successfully");
+  };
+
   return (
     <div className="space-y-8 p-4 md:p-8 max-w-7xl mx-auto">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Super Admin Dashboard</h1>
+        <h1 className="text-3xl font-bold tracking-tight">
+          {currentUser.tier === 'SuperAdmin' ? 'Super Admin Dashboard' : 'Admin Dashboard'}
+        </h1>
         <p className="text-slate-500 dark:text-slate-400 mt-1">
           Platform analytics and integration status.
         </p>
@@ -67,6 +97,9 @@ export default function AdminPage() {
         <TabsList>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="integrations">Integrations</TabsTrigger>
+          {currentUser.tier === 'SuperAdmin' && (
+            <TabsTrigger value="team">Team Management</TabsTrigger>
+          )}
         </TabsList>
 
         <TabsContent value="analytics" className="space-y-4">
@@ -212,6 +245,66 @@ export default function AdminPage() {
             </Card>
           </div>
         </TabsContent>
+
+        {currentUser.tier === 'SuperAdmin' && (
+          <TabsContent value="team" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Team Management</CardTitle>
+                <CardDescription>Manage roles and permissions for platform administrators.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="relative flex-1">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <Input 
+                      placeholder="Search users..." 
+                      className="pl-10"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {filteredUsers.map(user => (
+                    <div key={user.id} className="flex items-center justify-between p-4 border rounded-lg bg-slate-50 dark:bg-slate-900">
+                      <div className="flex items-center gap-4">
+                        <Avatar>
+                          <AvatarImage src={user.avatar} />
+                          <AvatarFallback>{user.fullName.substring(0, 2)}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <div className="font-bold">{user.fullName}</div>
+                          <div className="text-sm text-slate-500">{user.email}</div>
+                          {user.location && (
+                            <div className="text-xs text-slate-400 mt-1">{user.location}</div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <Select 
+                          defaultValue={user.tier} 
+                          onValueChange={(val) => handleTierChange(user.id, val as UserTier)}
+                        >
+                          <SelectTrigger className="w-[140px]">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Free">Free</SelectItem>
+                            <SelectItem value="VIP">VIP</SelectItem>
+                            <SelectItem value="Admin">Admin</SelectItem>
+                            <SelectItem value="SuperAdmin">Super Admin</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        )}
       </Tabs>
     </div>
   );

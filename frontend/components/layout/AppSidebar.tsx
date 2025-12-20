@@ -97,8 +97,8 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              {/* Admin Link - Only visible for Admins */}
-              {(currentUser.tier === 'Admin' || currentUser.tier === 'VIP') && (
+              {/* Admin Link - Only visible for Admins and SuperAdmins */}
+              {(currentUser.tier === 'Admin' || currentUser.tier === 'SuperAdmin') && (
                 <SidebarMenuItem>
                   <SidebarMenuButton 
                     asChild 

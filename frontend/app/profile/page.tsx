@@ -12,7 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { User } from '@/types';
-import { Linkedin, Send } from 'lucide-react';
+import { Linkedin, Send, MapPin } from 'lucide-react';
 
 export default function ProfilePage() {
   const { currentUser, updateProfile } = useStore();
@@ -77,6 +77,22 @@ export default function ProfilePage() {
                 <Label className="text-xs text-slate-500 uppercase font-bold">Member Since</Label>
                 <p className="text-sm">{new Date(currentUser.createdAt).toLocaleDateString()}</p>
               </div>
+              <div>
+                <Label className="text-xs text-slate-500 uppercase font-bold">Location</Label>
+                {isEditing ? (
+                  <Input 
+                    value={formData.location || ''} 
+                    onChange={(e) => setFormData({...formData, location: e.target.value})}
+                    placeholder="e.g. Zurich"
+                    className="mt-1"
+                  />
+                ) : (
+                  <p className="text-sm flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-slate-400" />
+                    {currentUser.location || 'Not set'}
+                  </p>
+                )}
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -132,6 +148,13 @@ export default function ProfilePage() {
                       <SelectItem value="DAO">DAO</SelectItem>
                       <SelectItem value="Infrastructure">Infrastructure</SelectItem>
                       <SelectItem value="CeFi">CeFi</SelectItem>
+                      <SelectItem value="Legal">Legal</SelectItem>
+                      <SelectItem value="VC">VC</SelectItem>
+                      <SelectItem value="Education">Education</SelectItem>
+                      <SelectItem value="Gaming">Gaming</SelectItem>
+                      <SelectItem value="Research">Research</SelectItem>
+                      <SelectItem value="Creative">Creative</SelectItem>
+                      <SelectItem value="Metaverse">Metaverse</SelectItem>
                     </SelectContent>
                   </Select>
                 ) : (

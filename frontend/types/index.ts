@@ -1,4 +1,4 @@
-export type UserTier = 'Free' | 'VIP' | 'Admin';
+export type UserTier = 'Free' | 'VIP' | 'Admin' | 'SuperAdmin';
 
 export interface User {
   id: string;
@@ -16,6 +16,7 @@ export interface User {
   visibility: 'Public' | 'Limited' | 'Hidden';
   linkedInUrl?: string;
   telegramHandle?: string;
+  location?: string;
   createdAt: string;
 }
 
