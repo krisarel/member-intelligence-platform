@@ -7,8 +7,8 @@ import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "WiW3CH Member Platform",
-  description: "Member Intelligence Platform for Women in Web3 Switzerland",
+  title: "WiW3CH Connect",
+  description: "The member intelligence & opportunity platform for Women in Web3 Switzerland",
 };
 
 export default function RootLayout({

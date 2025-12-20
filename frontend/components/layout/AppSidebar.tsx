@@ -9,7 +9,6 @@ import {
   UserCircle, 
   Settings, 
   LogOut,
-  Sparkles,
   Calendar,
   ShieldCheck
 } from "lucide-react";
@@ -62,12 +61,17 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-fuchsia-600 text-sidebar-primary-foreground">
-                <Sparkles className="size-4 text-white" />
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-white text-sidebar-primary-foreground overflow-hidden">
+                 {/* Placeholder for WiW3CH Logo - Using a styled text representation for now */}
+                 <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white font-bold text-[10px] leading-none">
+                   W3
+                 </div>
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">WiW3CH</span>
-                <span className="truncate text-xs">Member Platform</span>
+                <span className="truncate font-semibold">WiW3CH Connect</span>
+                <span className="truncate text-xs" title="The member intelligence & opportunity platform for Women in Web3 Switzerland">
+                  Member Intelligence Platform
+                </span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>

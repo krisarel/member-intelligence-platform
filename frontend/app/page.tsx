@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Sparkles, ArrowRight, Users, Briefcase, MessageSquare } from 'lucide-react';
+import { Sparkles, ArrowRight, Users, Briefcase, MessageSquare, Linkedin, ThumbsUp, MessageCircle, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 
@@ -195,6 +195,59 @@ export default function Dashboard() {
               ))}
               <Button variant="ghost" className="w-full text-sm text-violet-600 hover:text-violet-700 hover:bg-violet-50 dark:hover:bg-violet-900/20" onClick={() => router.push('/jobs')}>
                 View All Jobs <ArrowRight className="w-4 h-4 ml-1" />
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* LinkedIn Integration */}
+          <Card className="overflow-hidden border-blue-200 dark:border-blue-900/50">
+            <CardHeader className="bg-[#0077b5]/10 pb-3">
+              <div className="flex items-center gap-2">
+                <Linkedin className="w-5 h-5 text-[#0077b5]" />
+                <CardTitle className="text-sm font-bold text-[#0077b5]">Latest from WiW3CH</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="pt-4 space-y-3">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded bg-gradient-to-br from-violet-600 to-fuchsia-600 flex items-center justify-center text-white font-bold text-xs shrink-0">
+                  W3
+                </div>
+                <div>
+                  <p className="text-xs font-semibold">Women in Web3 Switzerland</p>
+                  <p className="text-[10px] text-slate-500">2 days ago</p>
+                </div>
+              </div>
+              
+              <p className="text-sm text-slate-700 dark:text-slate-300 line-clamp-4">
+                We&apos;re thrilled to announce our upcoming partnership with the Web3 Foundation! 🚀 Join us next week for an exclusive fireside chat about the future of decentralized governance. #WomenInWeb3 #Blockchain #Switzerland
+              </p>
+              
+              {/* Mock Image/Media */}
+              <div className="w-full h-32 bg-slate-100 dark:bg-slate-800 rounded-md flex items-center justify-center text-slate-400 text-xs">
+                [Event Photo Placeholder]
+              </div>
+
+              <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800">
+                <div className="flex gap-4">
+                  <button className="flex items-center gap-1 text-xs text-slate-500 hover:text-[#0077b5]">
+                    <ThumbsUp className="w-3 h-3" /> 42
+                  </button>
+                  <button className="flex items-center gap-1 text-xs text-slate-500 hover:text-[#0077b5]">
+                    <MessageCircle className="w-3 h-3" /> 8
+                  </button>
+                </div>
+                <button className="flex items-center gap-1 text-xs text-slate-500 hover:text-[#0077b5]">
+                  <Share2 className="w-3 h-3" /> Share
+                </button>
+              </div>
+
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full text-xs mt-2"
+                onClick={() => window.open('https://www.linkedin.com/company/wiw3ch', '_blank')}
+              >
+                View on LinkedIn
               </Button>
             </CardContent>
           </Card>
