@@ -37,14 +37,14 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-slate-950 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-600/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-fuchsia-600/20 rounded-full blur-[120px] animate-pulse delay-1000" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#7507c5]/20 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#00d6b9]/20 rounded-full blur-[120px] animate-pulse delay-1000" />
       </div>
 
       <Card className="w-full max-w-md z-10 bg-white/5 backdrop-blur-xl border-white/10 shadow-2xl">
         <CardHeader className="space-y-1 text-center">
           <div className="flex justify-center mb-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-600 flex items-center justify-center shadow-lg shadow-violet-500/20">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7507c5] to-[#00d6b9] flex items-center justify-center shadow-lg shadow-[#7507c5]/20">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
           </div>
@@ -64,24 +64,24 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-violet-500 focus:ring-violet-500/20"
+                className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-[#00d6b9] focus:ring-[#00d6b9]/20"
               />
             </div>
             <div className="text-xs text-slate-500 text-center">
-              Try <span className="font-mono text-violet-400">maya@example.com</span> for VIP demo
+              Try <span className="font-mono text-[#00d6b9]">maya@example.com</span> for VIP demo
             </div>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
             <Button 
               type="submit" 
-              className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white border-0"
+              className="w-full bg-gradient-to-r from-[#7507c5] to-[#00d6b9] hover:from-[#5e059e] hover:to-[#00b89f] text-white border-0"
               disabled={isLoading}
             >
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
             <div className="text-sm text-slate-400 text-center">
               Don&apos;t have an account?{" "}
-              <Link href="/register" className="text-violet-400 hover:text-violet-300 hover:underline">
+              <Link href="/register" className="text-[#00d6b9] hover:text-[#00b89f] hover:underline">
                 Join the community
               </Link>
             </div>
@@ -91,3 +91,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

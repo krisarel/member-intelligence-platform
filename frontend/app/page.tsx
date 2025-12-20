@@ -38,7 +38,7 @@ export default function Dashboard() {
       {/* Welcome Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-fuchsia-600">
+          <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#7507c5] to-[#00d6b9]">
             Welcome back, {currentUser.fullName.split(' ')[0]}
           </h1>
           <p className="text-slate-500 dark:text-slate-400 mt-1">
@@ -55,8 +55,8 @@ export default function Dashboard() {
       </div>
 
       {/* Profile Completion */}
-      <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700 text-white overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-violet-600/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
+      <Card className="bg-gradient-to-br from-[#1f7664] to-[#000000] border-slate-700 text-white overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#00d6b9]/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
         <CardContent className="p-6 flex flex-col md:flex-row items-center gap-6 relative z-10">
           <div className="flex-1 w-full">
             <div className="flex justify-between mb-2">
@@ -79,10 +79,10 @@ export default function Dashboard() {
         <div className="md:col-span-2 space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-violet-500" />
+              <Sparkles className="w-5 h-5 text-[#7507c5] dark:text-[#00d6b9]" />
               Recommended Connections
             </h2>
-            <Button variant="ghost" size="sm" onClick={refreshRecommendations} className="text-slate-500 hover:text-violet-600">
+            <Button variant="ghost" size="sm" onClick={refreshRecommendations} className="text-slate-500 hover:text-[#7507c5] dark:hover:text-[#00d6b9]">
               Refresh
             </Button>
           </div>
@@ -102,7 +102,7 @@ export default function Dashboard() {
                   <Card className="hover:shadow-lg transition-all duration-300 border-slate-200 dark:border-slate-800">
                     <CardContent className="p-6">
                       <div className="flex flex-col sm:flex-row gap-4 items-start">
-                        <Avatar className="w-16 h-16 border-2 border-violet-100 dark:border-violet-900">
+                        <Avatar className="w-16 h-16 border-2 border-[#faf2ff] dark:border-[#1f7664]">
                           <AvatarImage src={user.avatar} />
                           <AvatarFallback>{user.fullName.substring(0, 2)}</AvatarFallback>
                         </Avatar>
@@ -112,7 +112,7 @@ export default function Dashboard() {
                               <h3 className="font-bold text-lg">{user.fullName}</h3>
                               <p className="text-slate-500 dark:text-slate-400 text-sm">{user.headline}</p>
                             </div>
-                            <Badge variant="secondary" className="bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300">
+                            <Badge variant="secondary" className="bg-[#faf2ff] text-[#7507c5] dark:bg-[#1f7664]/30 dark:text-[#00d6b9]">
                               {rec.score}% Match
                             </Badge>
                           </div>
@@ -128,7 +128,7 @@ export default function Dashboard() {
                           <div className="mt-4 flex gap-3">
                             <Button 
                               size="sm" 
-                              className="bg-violet-600 hover:bg-violet-700 text-white"
+                              className="bg-[#7507c5] hover:bg-[#5e059e] text-white dark:bg-[#00d6b9] dark:hover:bg-[#00b89f] dark:text-black"
                               onClick={() => handleRequestIntro(user.id, user.fullName)}
                             >
                               Request Intro
@@ -186,14 +186,14 @@ export default function Dashboard() {
               {recentJobs.map(job => (
                 <div key={job.id} className="group cursor-pointer" onClick={() => router.push(`/jobs/${job.id}`)}>
                   <div className="flex justify-between items-start mb-1">
-                    <h4 className="font-medium text-sm group-hover:text-violet-600 transition-colors">{job.title}</h4>
-                    {job.isVipOnly && <Badge className="text-[10px] h-5 bg-amber-500">VIP</Badge>}
+                    <h4 className="font-medium text-sm group-hover:text-[#7507c5] dark:group-hover:text-[#00d6b9] transition-colors">{job.title}</h4>
+                    {job.isVipOnly && <Badge className="text-[10px] h-5 bg-[#00d6b9] text-black">VIP</Badge>}
                   </div>
                   <p className="text-xs text-slate-500">{job.company} • {job.location}</p>
                   <div className="h-[1px] w-full bg-slate-100 dark:bg-slate-800 my-3" />
                 </div>
               ))}
-              <Button variant="ghost" className="w-full text-sm text-violet-600 hover:text-violet-700 hover:bg-violet-50 dark:hover:bg-violet-900/20" onClick={() => router.push('/jobs')}>
+              <Button variant="ghost" className="w-full text-sm text-[#7507c5] hover:text-[#5e059e] hover:bg-[#faf2ff] dark:text-[#00d6b9] dark:hover:text-[#00b89f] dark:hover:bg-[#1f7664]/20" onClick={() => router.push('/jobs')}>
                 View All Jobs <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </CardContent>
@@ -209,7 +209,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent className="pt-4 space-y-3">
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded bg-gradient-to-br from-violet-600 to-fuchsia-600 flex items-center justify-center text-white font-bold text-xs shrink-0">
+                <div className="w-10 h-10 rounded bg-gradient-to-br from-[#7507c5] to-[#00d6b9] flex items-center justify-center text-white font-bold text-xs shrink-0">
                   W3
                 </div>
                 <div>
@@ -256,3 +256,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

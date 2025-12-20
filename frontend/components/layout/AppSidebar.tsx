@@ -63,7 +63,7 @@ export function AppSidebar() {
             <SidebarMenuButton size="lg" className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-white text-sidebar-primary-foreground overflow-hidden">
                  {/* Placeholder for WiW3CH Logo - Using a styled text representation for now */}
-                 <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white font-bold text-[10px] leading-none">
+                 <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-[#7507c5] to-[#00d6b9] text-white font-bold text-[10px] leading-none">
                    W3
                  </div>
               </div>
@@ -179,3 +179,4 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
+
