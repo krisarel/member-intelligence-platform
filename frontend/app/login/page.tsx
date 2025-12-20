@@ -24,10 +24,6 @@ export default function LoginPage() {
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     login(email);
-    // Check if login was successful (store updates synchronously but we might want to check if user exists)
-    // For now, we assume the store handles it or we can check store state.
-    // But since store.login doesn't return anything, we'll just redirect.
-    // In a real app, we'd handle errors.
     
     router.push('/');
     setIsLoading(false);
@@ -102,6 +98,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-
-
