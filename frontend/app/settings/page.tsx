@@ -40,10 +40,10 @@ export default function SettingsPage() {
         <Card>
           <CardHeader>
             <div className="flex items-center gap-2">
-              <CreditCard className="w-5 h-5 text-violet-500" />
+              <CreditCard className="w-5 h-5 text-[#7507c5] dark:text-[#00d6b9]" />
               <CardTitle>Membership Plan</CardTitle>
             </div>
-            <CardDescription>You are currently on the <span className="font-bold text-violet-600">{currentUser.tier}</span> plan.</CardDescription>
+            <CardDescription>You are currently on the <span className="font-bold text-[#7507c5] dark:text-[#00d6b9]">{currentUser.tier}</span> plan.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex justify-between items-center p-4 border rounded-lg bg-slate-50 dark:bg-slate-900">
@@ -53,15 +53,15 @@ export default function SettingsPage() {
               </div>
               {currentUser.tier === 'Free' && <span className="text-sm font-bold text-green-600">Current</span>}
             </div>
-            <div className="flex justify-between items-center p-4 border rounded-lg border-violet-200 bg-violet-50 dark:bg-violet-900/20 dark:border-violet-800">
+            <div className="flex justify-between items-center p-4 border rounded-lg border-[#7507c5]/20 bg-[#faf2ff] dark:bg-[#1f7664]/20 dark:border-[#1f7664]">
               <div>
-                <h3 className="font-bold text-violet-700 dark:text-violet-300">VIP Member</h3>
+                <h3 className="font-bold text-[#7507c5] dark:text-[#00d6b9]">VIP Member</h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400">Unlimited intros, priority placement, exclusive jobs.</p>
               </div>
               {currentUser.tier === 'VIP' ? (
-                <span className="text-sm font-bold text-violet-600">Current</span>
+                <span className="text-sm font-bold text-[#7507c5] dark:text-[#00d6b9]">Current</span>
               ) : (
-                <Button onClick={handleUpgrade} className="bg-violet-600 hover:bg-violet-700 text-white">Upgrade</Button>
+                <Button onClick={handleUpgrade} className="bg-[#7507c5] hover:bg-[#5e059e] text-white">Upgrade</Button>
               )}
             </div>
           </CardContent>
@@ -124,3 +124,4 @@ export default function SettingsPage() {
     </div>
   );
 }
+

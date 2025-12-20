@@ -21,7 +21,7 @@ export default function EventsPage() {
       </div>
 
       {/* Featured Event Card */}
-      <Card className="bg-gradient-to-br from-violet-900 to-fuchsia-900 border-none text-white overflow-hidden relative">
+      <Card className="bg-gradient-to-br from-[#7507c5] to-[#1f7664] border-none text-white overflow-hidden relative">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
         <CardContent className="p-8 relative z-10">
           <div className="flex flex-col md:flex-row gap-8 items-center">
@@ -30,21 +30,21 @@ export default function EventsPage() {
                 <Calendar className="w-4 h-4 mr-2" /> Next Major Event
               </div>
               <h2 className="text-3xl md:text-4xl font-bold">Web3 Financial Innovation Summit</h2>
-              <p className="text-violet-100 text-lg max-w-2xl">
+              <p className="text-[#faf2ff] text-lg max-w-2xl">
                 Join us for an evening of panel discussions and networking with leaders from Sygnum, UBS, and the Web3 Foundation.
               </p>
               <div className="flex flex-wrap gap-6 text-sm font-medium pt-2">
                 <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-fuchsia-300" />
+                  <Clock className="w-5 h-5 text-[#00d6b9]" />
                   <span>Oct 24, 18:00 - 21:00</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-fuchsia-300" />
+                  <MapPin className="w-5 h-5 text-[#00d6b9]" />
                   <span>Trust Square, Zurich</span>
                 </div>
               </div>
               <div className="pt-4">
-                <Button size="lg" className="bg-white text-violet-900 hover:bg-violet-50 font-bold" onClick={() => window.open('https://luma.com/wiw3ch?k=c', '_blank')}>
+                <Button size="lg" className="bg-white text-[#7507c5] hover:bg-[#faf2ff] font-bold" onClick={() => window.open('https://luma.com/wiw3ch?k=c', '_blank')}>
                   Register Now
                 </Button>
               </div>
@@ -53,9 +53,9 @@ export default function EventsPage() {
             {/* Luma Embed Placeholder / Visual */}
             <div className="w-full md:w-1/3 aspect-video bg-black/20 rounded-xl backdrop-blur-sm border border-white/10 flex items-center justify-center p-6 text-center">
               <div>
-                <p className="text-sm text-violet-200 mb-2">Powered by Luma</p>
+                <p className="text-sm text-[#eefaf8] mb-2">Powered by Luma</p>
                 <div className="text-2xl font-bold">WiW3CH Calendar</div>
-                <p className="text-xs text-violet-300 mt-2">Official Community Events</p>
+                <p className="text-xs text-[#00d6b9] mt-2">Official Community Events</p>
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@ export default function EventsPage() {
                     <span>Geneva, CH</span>
                   </div>
                 </div>
-                <Button size="sm" variant="outline" className="group-hover:bg-violet-50 dark:group-hover:bg-violet-900/20">
+                <Button size="sm" variant="outline" className="group-hover:bg-[#faf2ff] dark:group-hover:bg-[#1f7664]/20">
                   Details
                 </Button>
               </div>
@@ -97,3 +97,4 @@ export default function EventsPage() {
     </div>
   );
 }
+

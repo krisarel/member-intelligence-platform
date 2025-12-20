@@ -60,8 +60,8 @@ export default function IntroductionsPage() {
 
                 {/* Contact Details Reveal */}
                 {intro.status === 'Accepted' && (
-                  <div className="mt-4 p-4 bg-violet-50 dark:bg-violet-900/20 border border-violet-100 dark:border-violet-800 rounded-lg">
-                    <h4 className="text-sm font-semibold text-violet-700 dark:text-violet-300 mb-3 flex items-center gap-2">
+                  <div className="mt-4 p-4 bg-[#faf2ff] dark:bg-[#1f7664]/20 border border-[#7507c5]/20 dark:border-[#1f7664] rounded-lg">
+                    <h4 className="text-sm font-semibold text-[#7507c5] dark:text-[#00d6b9] mb-3 flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4" />
                       Contact Details Unlocked
                     </h4>
@@ -163,3 +163,4 @@ export default function IntroductionsPage() {
     </div>
   );
 }
+

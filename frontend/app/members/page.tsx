@@ -95,7 +95,7 @@ export default function MembersPage() {
                     <AvatarFallback className="text-2xl">{user.fullName.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                   {user.tier === 'VIP' && (
-                    <div className="absolute -bottom-2 -right-2 bg-amber-500 text-white p-1.5 rounded-full shadow-sm" title="VIP Member">
+                    <div className="absolute -bottom-2 -right-2 bg-[#00d6b9] text-black p-1.5 rounded-full shadow-sm" title="VIP Member">
                       <Star className="w-4 h-4 fill-current" />
                     </div>
                   )}
@@ -127,12 +127,12 @@ export default function MembersPage() {
                 </div>
               </CardContent>
               <CardFooter className="p-4 pt-0">
-                <Button 
-                  className="w-full bg-violet-600 hover:bg-violet-700 text-white"
-                  onClick={() => handleRequestIntro(user.id, user.fullName)}
-                >
-                  Request Intro
-                </Button>
+              <Button 
+              className="w-full bg-[#7507c5] hover:bg-[#5e059e] text-white"
+              onClick={() => handleRequestIntro(user.id, user.fullName)}
+              >
+              Request Intro
+              </Button>
               </CardFooter>
             </Card>
           </motion.div>

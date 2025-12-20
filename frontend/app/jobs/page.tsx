@@ -72,14 +72,14 @@ export default function JobsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
             >
-              <Card className={`border-l-4 ${job.isVipOnly ? 'border-l-amber-500' : 'border-l-violet-500'} hover:shadow-md transition-shadow`}>
+              <Card className={`border-l-4 ${job.isVipOnly ? 'border-l-[#00d6b9]' : 'border-l-[#7507c5]'} hover:shadow-md transition-shadow`}>
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <h3 className="text-xl font-bold">{job.title}</h3>
                         {job.isVipOnly && (
-                          <Badge className="bg-amber-500 hover:bg-amber-600">VIP Only</Badge>
+                          <Badge className="bg-[#00d6b9] hover:bg-[#00b89f] text-black">VIP Only</Badge>
                         )}
                         <Badge variant="outline">{job.type}</Badge>
                       </div>
@@ -119,7 +119,7 @@ export default function JobsPage() {
                       ) : (
                         <>
                           <Button 
-                            className="w-full bg-violet-600 hover:bg-violet-700 text-white"
+                            className="w-full bg-[#7507c5] hover:bg-[#5e059e] text-white"
                             disabled={hasApplied}
                             onClick={() => handleApply(job.id)}
                           >
@@ -175,3 +175,4 @@ export default function JobsPage() {
     </div>
   );
 }
+
