@@ -478,7 +478,7 @@ export const useStore = create<AppState>()(
       }
     }),
     {
-      name: 'wiw3-storage',
+      name: 'wiw3-storage-v2',
     }
   )
 );
