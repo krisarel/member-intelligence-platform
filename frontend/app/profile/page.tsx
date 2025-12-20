@@ -206,22 +206,36 @@ export default function ProfilePage() {
               <div className="space-y-2">
                 <Label className="flex items-center gap-2">
                   <Linkedin className="w-4 h-4 text-blue-600" />
-                  LinkedIn URL
+                  LinkedIn Integration
                 </Label>
                 {isEditing ? (
-                  <Input 
-                    value={formData.linkedInUrl || ''} 
-                    onChange={(e) => setFormData({...formData, linkedInUrl: e.target.value})}
-                    placeholder="https://linkedin.com/in/..."
-                  />
+                  <div className="flex gap-2">
+                    <Input 
+                      value={formData.linkedInUrl || ''} 
+                      onChange={(e) => setFormData({...formData, linkedInUrl: e.target.value})}
+                      placeholder="https://linkedin.com/in/..."
+                    />
+                  </div>
                 ) : (
-                  <p className="text-sm text-slate-600 dark:text-slate-300 truncate">
+                  <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800">
+                    <div className="flex items-center gap-2">
+                      <div className="bg-[#0077b5] p-1 rounded text-white">
+                        <Linkedin className="w-3 h-3" />
+                      </div>
+                      <span className="text-sm font-medium">
+                        {currentUser.linkedInUrl ? 'Connected' : 'Not Connected'}
+                      </span>
+                    </div>
                     {currentUser.linkedInUrl ? (
-                      <a href={currentUser.linkedInUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-                        {currentUser.linkedInUrl}
-                      </a>
-                    ) : 'Not set'}
-                  </p>
+                      <Button variant="ghost" size="sm" className="h-6 text-xs text-red-500 hover:text-red-600" onClick={() => updateProfile({ linkedInUrl: undefined })}>
+                        Disconnect
+                      </Button>
+                    ) : (
+                      <Button variant="outline" size="sm" className="h-6 text-xs" onClick={() => setIsEditing(true)}>
+                        Connect
+                      </Button>
+                    )}
+                  </div>
                 )}
               </div>
 
@@ -251,3 +265,4 @@ export default function ProfilePage() {
     </div>
   );
 }
+

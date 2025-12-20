@@ -213,6 +213,37 @@ export default function AdminPage() {
               </CardContent>
             </Card>
 
+            {/* LinkedIn Integration */}
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-[#0077b5] text-white rounded-lg flex items-center justify-center font-bold text-xl">
+                    in
+                  </div>
+                  <div>
+                    <CardTitle>LinkedIn Company</CardTitle>
+                    <CardDescription>Company page analytics and posts</CardDescription>
+                  </div>
+                </div>
+                <Badge className="bg-green-500 hover:bg-green-600">Connected</Badge>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-500">Page Followers</span>
+                  <span>1,240</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-500">Last Post Engagement</span>
+                  <span>4.8%</span>
+                </div>
+                <div className="pt-4">
+                  <Button variant="outline" className="w-full">
+                    <RefreshCw className="w-4 h-4 mr-2" /> Sync Now
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Luma Integration */}
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
@@ -309,3 +340,4 @@ export default function AdminPage() {
     </div>
   );
 }
+

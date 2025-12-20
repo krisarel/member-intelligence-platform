@@ -85,10 +85,22 @@ export default function LoginPage() {
                 Join the community
               </Link>
             </div>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-slate-700" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-slate-950 px-2 text-slate-400">Or continue with</span>
+              </div>
+            </div>
+            <Button variant="outline" className="w-full bg-[#0077b5] hover:bg-[#006396] text-white border-0" type="button">
+              <Linkedin className="mr-2 h-4 w-4" /> Sign in with LinkedIn
+            </Button>
           </CardFooter>
         </form>
       </Card>
     </div>
   );
 }
+
 
