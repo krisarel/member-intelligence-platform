@@ -40,6 +40,8 @@ const generateMockUsers = (): User[] => [
     skills: ['Financial Modeling', 'Solidity Basics', 'Risk Management'],
     goals: ['Career Transition', 'Mentorship'],
     visibility: 'Public',
+    linkedInUrl: 'https://linkedin.com/in/mayaweb3',
+    telegramHandle: '@maya_defi',
     createdAt: new Date().toISOString(),
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maya'
   },
@@ -56,6 +58,8 @@ const generateMockUsers = (): User[] => [
     skills: ['Community Management', 'Event Planning', 'Governance'],
     goals: ['Hiring', 'Networking'],
     visibility: 'Public',
+    linkedInUrl: 'https://linkedin.com/in/sofiacommunity',
+    telegramHandle: '@sofia_w3f',
     createdAt: new Date().toISOString(),
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sofia'
   },
@@ -72,6 +76,7 @@ const generateMockUsers = (): User[] => [
     skills: ['System Architecture', 'Team Leadership', 'Rust'],
     goals: ['Hiring', 'Mentorship'],
     visibility: 'Limited',
+    linkedInUrl: 'https://linkedin.com/in/elenatech',
     createdAt: new Date().toISOString(),
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Elena'
   },
@@ -88,6 +93,7 @@ const generateMockUsers = (): User[] => [
     skills: ['Figma', 'User Research', 'Prototyping'],
     goals: ['Freelance', 'Learning'],
     visibility: 'Public',
+    telegramHandle: '@sarah_design',
     createdAt: new Date().toISOString(),
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah'
   }
@@ -137,11 +143,6 @@ export const useStore = create<AppState>()(
           set({ currentUser: user });
           get().refreshRecommendations();
         } else {
-          // Auto-register for demo purposes if not found, or throw error
-          // For this demo, let's just alert or handle gracefully. 
-          // Actually, let's just mock a login failure if not found, 
-          // but to make it easy for the user, we'll auto-create a user if it's a new email
-          // or just fail. Let's fail to encourage registration.
           console.error("User not found");
         }
       },

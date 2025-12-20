@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { User } from '@/types';
+import { Linkedin, Send } from 'lucide-react';
 
 export default function ProfilePage() {
   const { currentUser, updateProfile } = useStore();
@@ -176,6 +177,50 @@ export default function ProfilePage() {
                   ))}
                 </div>
               )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2">
+                  <Linkedin className="w-4 h-4 text-blue-600" />
+                  LinkedIn URL
+                </Label>
+                {isEditing ? (
+                  <Input 
+                    value={formData.linkedInUrl || ''} 
+                    onChange={(e) => setFormData({...formData, linkedInUrl: e.target.value})}
+                    placeholder="https://linkedin.com/in/..."
+                  />
+                ) : (
+                  <p className="text-sm text-slate-600 dark:text-slate-300 truncate">
+                    {currentUser.linkedInUrl ? (
+                      <a href={currentUser.linkedInUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                        {currentUser.linkedInUrl}
+                      </a>
+                    ) : 'Not set'}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2">
+                  <Send className="w-4 h-4 text-sky-500" />
+                  Telegram Handle
+                </Label>
+                {isEditing ? (
+                  <Input 
+                    value={formData.telegramHandle || ''} 
+                    onChange={(e) => setFormData({...formData, telegramHandle: e.target.value})}
+                    placeholder="@username"
+                  />
+                ) : (
+                  <p className="text-sm text-slate-600 dark:text-slate-300">
+                    {currentUser.telegramHandle ? (
+                      <span className="text-sky-500">{currentUser.telegramHandle}</span>
+                    ) : 'Not set'}
+                  </p>
+                )}
+              </div>
             </div>
           </CardContent>
         </Card>

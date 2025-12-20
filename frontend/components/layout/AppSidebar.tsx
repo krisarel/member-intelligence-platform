@@ -9,7 +9,9 @@ import {
   UserCircle, 
   Settings, 
   LogOut,
-  Sparkles
+  Sparkles,
+  Calendar,
+  ShieldCheck
 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useStore } from "@/lib/store";
@@ -44,6 +46,7 @@ export function AppSidebar() {
     { title: "Members", url: "/members", icon: Users },
     { title: "Jobs", url: "/jobs", icon: Briefcase },
     { title: "Introductions", url: "/introductions", icon: MessageSquare },
+    { title: "Events", url: "/events", icon: Calendar },
   ];
 
   const secondaryItems = [
@@ -63,7 +66,7 @@ export function AppSidebar() {
                 <Sparkles className="size-4 text-white" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">WiW3 Switzerland</span>
+                <span className="truncate font-semibold">WiW3CH</span>
                 <span className="truncate text-xs">Member Platform</span>
               </div>
             </SidebarMenuButton>
@@ -90,6 +93,22 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              {/* Admin Link - Only visible for Admins */}
+              {(currentUser.tier === 'Admin' || currentUser.tier === 'VIP') && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton 
+                    asChild 
+                    isActive={pathname === '/admin'}
+                    tooltip="Admin Dashboard"
+                    onClick={() => router.push('/admin')}
+                  >
+                    <button>
+                      <ShieldCheck />
+                      <span>Admin</span>
+                    </button>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

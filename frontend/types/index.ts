@@ -15,6 +15,7 @@ export interface User {
   goals: string[];
   visibility: 'Public' | 'Limited' | 'Hidden';
   linkedInUrl?: string;
+  telegramHandle?: string;
   createdAt: string;
 }
 

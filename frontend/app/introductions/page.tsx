@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle2, XCircle, Clock, MessageSquare } from 'lucide-react';
+import { CheckCircle2, XCircle, Clock, MessageSquare, Mail, Linkedin, Send } from 'lucide-react';
 import { toast } from 'sonner';
 import { Introduction } from '@/types';
 
@@ -34,12 +34,12 @@ export default function IntroductionsPage() {
       <Card className="mb-4">
         <CardContent className="p-6">
           <div className="flex flex-col md:flex-row gap-4 justify-between items-start">
-            <div className="flex gap-4">
+            <div className="flex gap-4 w-full">
               <Avatar className="w-12 h-12">
                 <AvatarImage src={otherUser.avatar} />
                 <AvatarFallback>{otherUser.fullName.substring(0, 2)}</AvatarFallback>
               </Avatar>
-              <div>
+              <div className="flex-1">
                 <div className="flex items-center gap-2">
                   <h3 className="font-bold">{otherUser.fullName}</h3>
                   <Badge variant={
@@ -57,10 +57,38 @@ export default function IntroductionsPage() {
                   <Clock className="w-3 h-3" />
                   {new Date(intro.createdAt).toLocaleDateString()}
                 </div>
+
+                {/* Contact Details Reveal */}
+                {intro.status === 'Accepted' && (
+                  <div className="mt-4 p-4 bg-violet-50 dark:bg-violet-900/20 border border-violet-100 dark:border-violet-800 rounded-lg">
+                    <h4 className="text-sm font-semibold text-violet-700 dark:text-violet-300 mb-3 flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4" />
+                      Contact Details Unlocked
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="flex items-center gap-2 text-sm">
+                        <Mail className="w-4 h-4 text-slate-400" />
+                        <a href={`mailto:${otherUser.email}`} className="hover:underline">{otherUser.email}</a>
+                      </div>
+                      {otherUser.linkedInUrl && (
+                        <div className="flex items-center gap-2 text-sm">
+                          <Linkedin className="w-4 h-4 text-blue-600" />
+                          <a href={otherUser.linkedInUrl} target="_blank" rel="noopener noreferrer" className="hover:underline text-blue-600 dark:text-blue-400">LinkedIn Profile</a>
+                        </div>
+                      )}
+                      {otherUser.telegramHandle && (
+                        <div className="flex items-center gap-2 text-sm">
+                          <Send className="w-4 h-4 text-sky-500" />
+                          <span className="text-sky-600 dark:text-sky-400">{otherUser.telegramHandle}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className="flex gap-2 w-full md:w-auto">
+            <div className="flex gap-2 w-full md:w-auto shrink-0">
               {isReceived && intro.status === 'Pending' && (
                 <>
                   <Button 
@@ -82,7 +110,7 @@ export default function IntroductionsPage() {
               )}
               
               {intro.status === 'Accepted' && (
-                <Button variant="outline" size="sm" className="w-full md:w-auto">
+                <Button variant="outline" size="sm" className="w-full md:w-auto" onClick={() => window.location.href = `mailto:${otherUser.email}`}>
                   <MessageSquare className="w-4 h-4 mr-1" /> Send Email
                 </Button>
               )}
