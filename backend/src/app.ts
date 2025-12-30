@@ -45,6 +45,15 @@ app.get('/health', (_req: Request, res: Response) => {
   });
 });
 
+// API health check endpoint (for Render)
+app.get('/api/health', (_req: Request, res: Response) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'API is healthy',
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // API routes
 app.get('/api', (_req: Request, res: Response) => {
   res.status(200).json({
