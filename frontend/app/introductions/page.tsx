@@ -1,34 +1,129 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStore } from '@/lib/store';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle2, XCircle, Clock, MessageSquare, Mail, Linkedin, Send } from 'lucide-react';
+import { CheckCircle2, XCircle, Clock, MessageSquare, Mail, Linkedin, Send, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
-import { Introduction } from '@/types';
+import { config } from '@/lib/config';
+
+interface IntroductionRequest {
+  _id: string;
+  fromUser: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    headline?: string;
+    avatar?: string;
+    linkedInUrl?: string;
+    telegramHandle?: string;
+  };
+  toUser: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    headline?: string;
+    avatar?: string;
+    linkedInUrl?: string;
+    telegramHandle?: string;
+  };
+  message: string;
+  intentCategory: string;
+  intentDescription?: string;
+  status: 'pending' | 'accepted' | 'declined';
+  createdAt: string;
+  updatedAt: string;
+}
 
 export default function IntroductionsPage() {
-  const { introductions, currentUser, users, respondToIntro } = useStore();
+  const { currentUser, users } = useStore();
+  const [introductions, setIntroductions] = useState<IntroductionRequest[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchIntroductions();
+  }, []);
+
+  const fetchIntroductions = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
+
+      const response = await fetch(`${config.apiUrl}/introductions`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setIntroductions(data.data || []);
+      }
+    } catch (error) {
+      console.error('Error fetching introductions:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleRespond = async (id: string, status: 'accepted' | 'declined') => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        toast.error('Please log in to respond to introductions');
+        return;
+      }
+
+      const response = await fetch(`${config.apiUrl}/introductions/${id}/respond`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ status }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to respond to introduction');
+      }
+
+      toast.success(`Introduction ${status}`);
+      fetchIntroductions(); // Refresh the list
+    } catch (error) {
+      console.error('Error responding to introduction:', error);
+      toast.error('Failed to respond to introduction');
+    }
+  };
 
   if (!currentUser) return null;
 
-  const sentIntros = introductions.filter(i => i.fromUserId === currentUser.id);
-  const receivedIntros = introductions.filter(i => i.toUserId === currentUser.id);
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
-  const handleRespond = (id: string, status: 'Accepted' | 'Declined') => {
-    respondToIntro(id, status);
-    toast.success(`Introduction ${status.toLowerCase()}`);
-  };
+  const storedUser = localStorage.getItem('user');
+  const currentUserId = storedUser ? JSON.parse(storedUser)._id : currentUser.id;
 
-  const IntroCard = ({ intro, isReceived }: { intro: Introduction, isReceived: boolean }) => {
-    const otherUserId = isReceived ? intro.fromUserId : intro.toUserId;
-    const otherUser = users.find(u => u.id === otherUserId);
+  const sentIntros = introductions.filter(i => i.fromUser._id === currentUserId);
+  const receivedIntros = introductions.filter(i => i.toUser._id === currentUserId);
 
-    if (!otherUser) return null;
+  const IntroCard = ({ intro, isReceived }: { intro: IntroductionRequest, isReceived: boolean }) => {
+    const otherUser = isReceived ? intro.fromUser : intro.toUser;
+    const fullName = `${otherUser.firstName} ${otherUser.lastName}`;
+    const avatar = otherUser.avatar || `https://api.dicebear.com/7.x/adventurer/svg?seed=${otherUser.email}`;
 
     return (
       <Card className="mb-4">
@@ -36,20 +131,25 @@ export default function IntroductionsPage() {
           <div className="flex flex-col md:flex-row gap-4 justify-between items-start">
             <div className="flex gap-4 w-full">
               <Avatar className="w-12 h-12">
-                <AvatarImage src={otherUser.avatar} />
-                <AvatarFallback>{otherUser.fullName.substring(0, 2)}</AvatarFallback>
+                <AvatarImage src={avatar} />
+                <AvatarFallback>{fullName.substring(0, 2)}</AvatarFallback>
               </Avatar>
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-bold">{otherUser.fullName}</h3>
+                  <h3 className="font-bold">{fullName}</h3>
                   <Badge variant={
-                    intro.status === 'Accepted' ? 'default' : 
-                    intro.status === 'Declined' ? 'destructive' : 'secondary'
+                    intro.status === 'accepted' ? 'default' :
+                    intro.status === 'declined' ? 'destructive' : 'secondary'
                   }>
-                    {intro.status}
+                    {intro.status.charAt(0).toUpperCase() + intro.status.slice(1)}
                   </Badge>
                 </div>
-                <p className="text-sm text-slate-500">{otherUser.headline}</p>
+                <p className="text-sm text-slate-500">{otherUser.headline || 'Member'}</p>
+                {intro.intentCategory && (
+                  <Badge variant="outline" className="mt-1 text-xs">
+                    {intro.intentCategory.replace('_', ' ')}
+                  </Badge>
+                )}
                 <div className="mt-2 bg-slate-50 dark:bg-slate-900 p-3 rounded-lg text-sm">
                   <p className="text-slate-600 dark:text-slate-300 italic">&quot;{intro.message}&quot;</p>
                 </div>
@@ -59,7 +159,7 @@ export default function IntroductionsPage() {
                 </div>
 
                 {/* Contact Details Reveal */}
-                {intro.status === 'Accepted' && (
+                {intro.status === 'accepted' && (
                   <div className="mt-4 p-4 bg-[#faf2ff] dark:bg-[#1f7664]/20 border border-[#7507c5]/20 dark:border-[#1f7664] rounded-lg">
                     <h4 className="text-sm font-semibold text-[#7507c5] dark:text-[#00d6b9] mb-3 flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4" />
@@ -89,27 +189,27 @@ export default function IntroductionsPage() {
             </div>
 
             <div className="flex gap-2 w-full md:w-auto shrink-0">
-              {isReceived && intro.status === 'Pending' && (
+              {isReceived && intro.status === 'pending' && (
                 <>
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     className="bg-green-600 hover:bg-green-700 text-white flex-1 md:flex-none"
-                    onClick={() => handleRespond(intro.id, 'Accepted')}
+                    onClick={() => handleRespond(intro._id, 'accepted')}
                   >
                     <CheckCircle2 className="w-4 h-4 mr-1" /> Accept
                   </Button>
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     variant="destructive"
                     className="flex-1 md:flex-none"
-                    onClick={() => handleRespond(intro.id, 'Declined')}
+                    onClick={() => handleRespond(intro._id, 'declined')}
                   >
                     <XCircle className="w-4 h-4 mr-1" /> Decline
                   </Button>
                 </>
               )}
               
-              {intro.status === 'Accepted' && (
+              {intro.status === 'accepted' && (
                 <Button variant="outline" size="sm" className="w-full md:w-auto" onClick={() => window.location.href = `mailto:${otherUser.email}`}>
                   <MessageSquare className="w-4 h-4 mr-1" /> Send Email
                 </Button>
@@ -132,7 +232,7 @@ export default function IntroductionsPage() {
 
       <Tabs defaultValue="received" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="received">Received ({receivedIntros.filter(i => i.status === 'Pending').length} Pending)</TabsTrigger>
+          <TabsTrigger value="received">Received ({receivedIntros.filter(i => i.status === 'pending').length} Pending)</TabsTrigger>
           <TabsTrigger value="sent">Sent</TabsTrigger>
         </TabsList>
         
@@ -143,7 +243,7 @@ export default function IntroductionsPage() {
             </div>
           ) : (
             receivedIntros.map(intro => (
-              <IntroCard key={intro.id} intro={intro} isReceived={true} />
+              <IntroCard key={intro._id} intro={intro} isReceived={true} />
             ))
           )}
         </TabsContent>
@@ -155,7 +255,7 @@ export default function IntroductionsPage() {
             </div>
           ) : (
             sentIntros.map(intro => (
-              <IntroCard key={intro.id} intro={intro} isReceived={false} />
+              <IntroCard key={intro._id} intro={intro} isReceived={false} />
             ))
           )}
         </TabsContent>

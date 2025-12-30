@@ -11,10 +11,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { currentUser } = useStore();
   
-  // Don't show sidebar on login/register pages
-  const isAuthPage = pathname === "/login" || pathname === "/register";
+  // Don't show sidebar on public pages (landing, login, register)
+  const isPublicPage = pathname === "/" || pathname === "/login" || pathname === "/register";
 
-  if (isAuthPage || !currentUser) {
+  if (isPublicPage || !currentUser) {
     return <div className="min-h-screen bg-slate-50 dark:bg-slate-950">{children}</div>;
   }
 

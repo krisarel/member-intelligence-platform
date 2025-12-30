@@ -46,7 +46,7 @@ const generateMockUsers = (): User[] => [
     linkedInUrl: 'https://linkedin.com/in/mayaweb3',
     telegramHandle: '@maya_defi',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maya'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Maya'
   },
   {
     id: '2',
@@ -65,7 +65,7 @@ const generateMockUsers = (): User[] => [
     linkedInUrl: 'https://linkedin.com/in/sofiacommunity',
     telegramHandle: '@sofia_w3f',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sofia'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Sofia'
   },
   // Chapter Members
   {
@@ -84,7 +84,7 @@ const generateMockUsers = (): User[] => [
     location: 'Zurich',
     linkedInUrl: 'https://linkedin.com/in/elenatech',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Elena'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Elena'
   },
   {
     id: '4',
@@ -102,7 +102,7 @@ const generateMockUsers = (): User[] => [
     location: 'Lugano',
     telegramHandle: '@sarah_design',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Sarah'
   },
   {
     id: '5',
@@ -119,7 +119,7 @@ const generateMockUsers = (): User[] => [
     visibility: 'Public',
     location: 'UAE',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Fatima'
   },
   {
     id: '6',
@@ -136,7 +136,7 @@ const generateMockUsers = (): User[] => [
     visibility: 'Public',
     location: 'France',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Marie'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Marie'
   },
   {
     id: '7',
@@ -153,7 +153,7 @@ const generateMockUsers = (): User[] => [
     visibility: 'Public',
     location: 'USA',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jessica'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Jessica'
   },
   {
     id: '8',
@@ -170,7 +170,7 @@ const generateMockUsers = (): User[] => [
     visibility: 'Public',
     location: 'Russia',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Anastasia'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Anastasia'
   },
   {
     id: '9',
@@ -187,7 +187,7 @@ const generateMockUsers = (): User[] => [
     visibility: 'Public',
     location: 'Azerbaijan',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Leyla'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Leyla'
   },
   {
     id: '10',
@@ -204,7 +204,7 @@ const generateMockUsers = (): User[] => [
     visibility: 'Public',
     location: 'India',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Priya'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Priya'
   },
   {
     id: '11',
@@ -221,7 +221,7 @@ const generateMockUsers = (): User[] => [
     visibility: 'Public',
     location: 'Africa',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Aminata'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Aminata'
   },
   {
     id: '12',
@@ -238,7 +238,7 @@ const generateMockUsers = (): User[] => [
     visibility: 'Public',
     location: 'Balkan',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ElenaB'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=ElenaB'
   },
   {
     id: '13',
@@ -255,7 +255,7 @@ const generateMockUsers = (): User[] => [
     visibility: 'Public',
     location: 'St. Gallen',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Clara'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Clara'
   },
   {
     id: '14',
@@ -272,7 +272,7 @@ const generateMockUsers = (): User[] => [
     visibility: 'Public',
     location: 'Morocco',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Yasmina'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Yasmina'
   },
   {
     id: '15',
@@ -289,7 +289,7 @@ const generateMockUsers = (): User[] => [
     visibility: 'Public',
     location: 'South Korea',
     createdAt: new Date().toISOString(),
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=JiWoo'
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=JiWoo'
   }
 ];
 
@@ -332,13 +332,52 @@ export const useStore = create<AppState>()(
       recommendations: [],
 
       login: (email) => {
-        const user = get().users.find(u => u.email === email);
-        if (user) {
-          set({ currentUser: user });
-          get().refreshRecommendations();
-        } else {
+        let user = get().users.find(u => u.email === email);
+        
+        // If user not found in store, try to get from localStorage
+        if (!user) {
+          const storedUser = localStorage.getItem('user');
+          if (storedUser) {
+            try {
+              const userData = JSON.parse(storedUser);
+              // Create a user object from the stored data
+              user = {
+                id: userData._id || userData.id,
+                email: userData.email,
+                fullName: `${userData.firstName} ${userData.lastName}`,
+                tier: userData.membershipTier || 'Free',
+                headline: userData.headline || 'Member',
+                bio: userData.bio || '',
+                industry: userData.industry || '',
+                functionalArea: userData.functionalArea || '',
+                experienceLevel: userData.experienceLevel || 'Mid-Level',
+                skills: userData.skills || [],
+                goals: userData.goals || [],
+                visibility: userData.visibility || 'Public',
+                location: userData.location || '',
+                linkedInUrl: userData.linkedInUrl || '',
+                telegramHandle: userData.telegramHandle || '',
+                createdAt: userData.createdAt || new Date().toISOString(),
+                avatar: userData.avatar || `https://api.dicebear.com/7.x/adventurer/svg?seed=${userData.email}`
+              };
+              
+              // Add user to store if not already there
+              set(state => ({
+                users: [...state.users, user!],
+                currentUser: user!
+              }));
+              get().refreshRecommendations();
+              return;
+            } catch (error) {
+              console.error("Error parsing stored user:", error);
+            }
+          }
           console.error("User not found");
+          return;
         }
+        
+        set({ currentUser: user });
+        get().refreshRecommendations();
       },
 
       logout: () => set({ currentUser: null }),
@@ -348,7 +387,7 @@ export const useStore = create<AppState>()(
           ...userData,
           id: Math.random().toString(36).substr(2, 9),
           createdAt: new Date().toISOString(),
-          avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userData.fullName.replace(' ', '')}`
+          avatar: `https://api.dicebear.com/7.x/adventurer/svg?seed=${userData.fullName.replace(' ', '')}`
         };
         set(state => ({ 
           users: [...state.users, newUser],

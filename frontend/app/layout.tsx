@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import AppLayout from "@/components/layout/AppLayout";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,12 +18,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.className} bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50`}>
-        <AppLayout>
-          {children}
-        </AppLayout>
-        <Toaster />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} bg-background text-foreground`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          themes={['light', 'dark', 'purple']}
+          enableSystem={false}
+          storageKey="wiw3ch-theme"
+        >
+          <AppLayout>
+            {children}
+          </AppLayout>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
