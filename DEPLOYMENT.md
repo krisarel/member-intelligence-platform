@@ -9,20 +9,17 @@ This guide covers deploying the Member Intelligence Platform to Render.com using
 - OpenAI API key
 - Render.com account
 
-## Deployment Issues Fixed
+## Deployment Configuration
 
-### Previous Errors
-The deployment was failing because:
-1. **Wrong runtime detected**: Render was detecting Python instead of Node.js
-2. **Missing root directory**: The `backend` directory wasn't properly configured
-3. **Missing requirements.txt**: Render was looking for Python dependencies
+### Understanding Render's Build Process
+When you deploy, you may see Render initially try to detect Python/Poetry - this is normal. Render's auto-detection tries multiple runtimes before using the one specified in `render.yaml`. The build will succeed once it uses the Node.js runtime.
 
-### Solution
-Created a `render.yaml` file that explicitly configures:
+### What's Configured
+The `render.yaml` file explicitly configures:
 - Node.js runtime for both backend and frontend
 - Correct root directories (`backend/` and `frontend/`)
 - Proper build and start commands
-- Environment variables
+- Required environment variables (some need manual configuration)
 
 ## Deployment Steps
 
@@ -74,8 +71,8 @@ If you prefer manual setup:
 Set these in the Render dashboard for your backend service:
 
 ```
-NODE_ENV=production
-PORT=10000
+NODE_ENV=production (auto-configured)
+PORT=10000 (auto-configured)
 MONGODB_URI=<your-mongodb-connection-string>
 JWT_SECRET=<your-secure-jwt-secret>
 OPENAI_API_KEY=<your-openai-api-key>
@@ -83,10 +80,11 @@ FRONTEND_URL=<your-frontend-render-url>
 ```
 
 **Important Notes:**
-- `PORT` is automatically set by Render to 10000
+- `NODE_ENV` and `PORT` are automatically configured in render.yaml
 - `MONGODB_URI` should be your MongoDB Atlas connection string
 - `JWT_SECRET` should be a long, random string (generate with: `openssl rand -base64 32`)
-- `FRONTEND_URL` will be provided after frontend deployment (e.g., `https://member-intelligence-frontend.onrender.com`)
+- `FRONTEND_URL` is REQUIRED for CORS - set it after frontend deployment (e.g., `https://member-intelligence-frontend.onrender.com`)
+- `OPENAI_API_KEY` is required for AI-powered features
 
 #### Frontend Environment Variables
 Set these in the Render dashboard for your frontend service:
@@ -151,20 +149,40 @@ The backend includes health check endpoints for monitoring:
 
 ## Troubleshooting
 
+### Build Shows Python/Poetry Detection
+**This is normal!** Render's auto-detection tries multiple runtimes. As long as you see "Build successful 🎉" at the end, your deployment is working correctly.
+
 ### Build Fails
 - Check that `package.json` exists in both `backend/` and `frontend/` directories
 - Verify all dependencies are listed in `package.json`
-- Check build logs for specific errors
+- Check build logs for the actual error (usually near the end)
+- Ensure TypeScript compiles without errors locally: `cd backend && npm run build`
+
+### Service Won't Start / Health Check Fails
+- **Most common issue**: Missing or incorrect environment variables
+- Verify `MONGODB_URI` is set and valid
+- Verify `JWT_SECRET` is set
+- Verify `OPENAI_API_KEY` is set (required for AI features)
+- Verify `FRONTEND_URL` is set (required for CORS)
+- Check service logs in Render dashboard for specific errors
+
+**Common Error: "Missing credentials. Please pass an `apiKey`, or set the `OPENAI_API_KEY` environment variable"**
+- This means `OPENAI_API_KEY` is not set in Render dashboard
+- Go to your backend service → Environment → Add Environment Variable
+- Add `OPENAI_API_KEY` with your OpenAI API key
+- Save and redeploy
 
 ### Runtime Errors
-- Verify all environment variables are set correctly
-- Check that MongoDB connection string is valid
-- Ensure MongoDB Atlas allows connections from Render
+- Verify all environment variables are set correctly in Render dashboard
+- Check that MongoDB connection string is valid and includes credentials
+- Ensure MongoDB Atlas allows connections from `0.0.0.0/0` or Render's IP ranges
+- Check service logs for database connection errors
 
-### Connection Issues
-- Verify `FRONTEND_URL` in backend matches your frontend URL
-- Verify `NEXT_PUBLIC_API_URL` in frontend matches your backend URL
-- Check CORS configuration in backend
+### Connection Issues / CORS Errors
+- Verify `FRONTEND_URL` in backend matches your frontend URL exactly (including https://)
+- Verify `NEXT_PUBLIC_API_URL` in frontend matches your backend URL exactly
+- Check CORS configuration in backend/src/app.ts
+- Ensure both services are deployed and running
 
 ### Free Tier Limitations
 Render's free tier has some limitations:
