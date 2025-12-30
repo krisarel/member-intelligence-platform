@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,7 +11,7 @@ import { Sparkles, Linkedin } from 'lucide-react';
 import { useStore } from '@/lib/store';
 import { config } from '@/lib/config';
 
-export default function AuthPage() {
+function AuthPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { login: storeLogin, register: storeRegister } = useStore();
@@ -348,5 +348,28 @@ export default function AuthPage() {
         </Tabs>
       </Card>
     </div>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="w-full max-w-md">
+          <Card className="w-full bg-card/80 backdrop-blur-xl border-border shadow-2xl">
+            <CardHeader className="space-y-1 text-center">
+              <div className="flex justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent-foreground flex items-center justify-center shadow-lg shadow-primary/20">
+                  <Sparkles className="w-6 h-6 text-primary-foreground" />
+                </div>
+              </div>
+              <CardTitle className="text-2xl font-bold text-foreground">Loading...</CardTitle>
+            </CardHeader>
+          </Card>
+        </div>
+      </div>
+    }>
+      <AuthPageContent />
+    </Suspense>
   );
 }
