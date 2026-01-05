@@ -8,6 +8,7 @@ import jobRoutes from './routes/jobRoutes';
 import profileRoutes from './routes/profileRoutes';
 import onboardingRoutes from './routes/onboardingRoutes';
 import introductionRoutes from './routes/introductionRoutes';
+import adminRoutes from './routes/adminRoutes';
 
 dotenv.config();
 
@@ -80,6 +81,9 @@ app.use('/api/profile', profileRoutes);
 
 // Introduction request routes
 app.use('/api/introductions', introductionRoutes);
+
+// Admin routes (protected)
+app.use('/api/admin', adminRoutes);
 
 // 404 handler
 app.use((_req: Request, res: Response) => {
