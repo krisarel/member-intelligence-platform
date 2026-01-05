@@ -39,8 +39,26 @@ const seedUsers = async () => {
 
     // Create 50 comprehensive test users with full onboarding data
     const users: any[] = [
+      // Demo account for testing onboarding flow
       {
-        email: 'maya.rodriguez@example.com',
+        email: 'aliya@example.com',
+        password: 'hellothere',
+        firstName: 'Aliya',
+        lastName: 'Johnson',
+        role: 'member' as const,
+        membershipTier: 'free' as const,
+        authProviders: ['email' as const],
+        uiThemePreference: 'light' as const,
+        onboardingCompleted: false,
+        lastLoginAt: new Date(),
+        onboarding: {
+          intentModes: [],
+          currentStep: 0,
+        },
+      },
+      // Demo account for VIP with completed onboarding
+      {
+        email: 'maya@example.com',
         password: 'password123',
         firstName: 'Maya',
         lastName: 'Rodriguez',
@@ -330,13 +348,14 @@ const seedUsers = async () => {
     }
 
     console.log(`\n🎉 Seed completed successfully! Created ${createdUsers.length} users.`);
-    console.log('\n📋 Sample test accounts:');
+    console.log('\n📋 Demo test accounts (matching auth page):');
     console.log('━'.repeat(80));
-    console.log('1. maya.rodriguez@example.com / password123 (VIP tier, DeFi leader)');
-    console.log('2. sofia.chen@example.com / password123 (Admin, Community lead)');
-    console.log('3. elena.petrov@example.com / password123 (VIP tier, Engineering leader)');
-    console.log('4. sarah.kim@example.com / password123 (Free tier, Designer)');
-    console.log('5. ... and 46 more users with complete profiles!');
+    console.log('1. aliya@example.com / hellothere (Free tier, test onboarding flow)');
+    console.log('2. maya@example.com / password123 (VIP tier, skip onboarding)');
+    console.log('3. sofia.chen@example.com / password123 (Admin, Community lead)');
+    console.log('4. elena.petrov@example.com / password123 (VIP tier, Engineering leader)');
+    console.log('5. sarah.kim@example.com / password123 (Free tier, Designer)');
+    console.log('6. ... and 45 more users with complete profiles!');
     console.log('━'.repeat(80));
 
     process.exit(0);
